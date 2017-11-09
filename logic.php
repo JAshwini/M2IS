@@ -1,0 +1,41 @@
+<?php
+$servername = "35.154.150.123";
+$username = "mis";
+$password = "sankalp";
+$dbname = "movie";
+
+// Create connection
+$conn = new mysqli($servername, $username, $password,$dbname);
+
+// Check connection
+if ($conn->connect_error) {
+    die("Connection failed: " . $conn->connect_error);
+}
+if($_GET['getdata']=="starcast"){
+	$data = array();
+	if($_GET['director']!="" && $_GET['genre']!="" && $_GET['productionhouse']!=""){
+		$result = mysqli_query($conn,'select * from actor where id in (select actor_id from actors_in_movie where movie_id in (select id from movie where id in (select movie_id from directors_of_movie where director_id='.$_GET['director'].') && production_id='.$_GET['productionhouse'].' && genre="'.$_GET['genre'].'"))');
+		
+	}
+	elseif($_GET['director']=="" && $_GET['genre']!="" && $_GET['productionhouse']!=""){
+		$result = mysqli_query($conn,'select * from actor where id in (select actor_id from actors_in_movie where movie_id in (select id from movie where production_id='.$_GET['productionhouse'].' && genre="'.$_GET['genre'].'"))');
+	}
+	elseif ($_GET['director']!="" && $_GET['genre']=="" && $_GET['productionhouse']!="") {
+		$result = mysqli_query($conn,'select * from actor where id in (select actor_id from actors_in_movie where movie_id in (select id from movie where id in (select movie_id from directors_of_movie where director_id='.$_GET['director'].') && production_id='.$_GET['productionhouse'].'))');
+	}
+	elseif ($_GET['director']!="" && $_GET['genre']=="" && $_GET['productionhouse']=="") {
+		$result = mysqli_query($conn,'select * from actor where id in (select actor_id from actors_in_movie where movie_id in (select id from movie where id in (select movie_id from directors_of_movie where director_id='.$_GET['director'].')))');
+	}
+	elseif ($_GET['director']=="" && $_GET['genre']=="" && $_GET['productionhouse']!="") {
+		$result = mysqli_query($conn,'select * from actor where id in (select actor_id from actors_in_movie where movie_id in (select id from movie where production_id='.$_GET['productionhouse'].'))');
+	}
+	elseif ($_GET['director']=="" && $_GET['genre']!="" && $_GET['productionhouse']=="") {
+		$result = mysqli_query($conn,'select * from actor where id in (select actor_id from actors_in_movie where movie_id in (select id from movie where genre="'.$_GET['genre'].'"))');
+	}
+	$i=1;
+	while ($row = $result->fetch_assoc()) {
+		$data[$i]=$row["name"];
+		$i++;
+	}
+	echo json_encode($data);
+}
