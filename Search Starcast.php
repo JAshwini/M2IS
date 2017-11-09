@@ -74,7 +74,7 @@ $genre_data = mysqli_query($conn,"select DISTINCT genre from movie");
                             <div class="col-8">
                                <div class="form-group">
                                   <select class="form-control" id="director">
-                                    <option value="">Select</option>
+                                    <option >Select</option>
                                     <?php
                                       while (($row = $director_data->fetch_assoc())) {
                                     ?>
@@ -94,7 +94,7 @@ $genre_data = mysqli_query($conn,"select DISTINCT genre from movie");
                               <div class="col-8">
                                <div class="form-group">
                                   <select class="form-control" id="genre">
-                                    <option value="">Select</option>
+                                    <option >Select</option>
                                     <?php
                                       while (($row = $genre_data->fetch_assoc())) {
                                     ?>
@@ -114,7 +114,7 @@ $genre_data = mysqli_query($conn,"select DISTINCT genre from movie");
                               <div class="col-8">
                                <div class="form-group">
                                   <select class="form-control" id="productionHouse">
-                                    <option value="">Select</option>
+                                    <option >Select</option>
                                     <?php
                                       while (($row = $production_house_data->fetch_assoc())) {
                                     ?>

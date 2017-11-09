@@ -148,14 +148,6 @@ $production_house_data = mysqli_query($conn,"select * from production_house");
                         </tbody>
                       </table>
     </div>
-    <!-- Scripts -->
-    <script type="text/javascript" src="./js/jquery.min.js.download"></script>
-    <script type="text/javascript" src="./js/popper.min.js.download"></script>
-    <script type="text/javascript" src="./js/bootstrap.min.js.download"></script>
-    <script type="text/javascript" src="./js/jquery.dataTables.min.js.download"></script>
-    <!-- Custom Scripts -->
-    <script type="text/javascript" src="./js/navbar.js.download"></script>
-    <script type="text/javascript" src="./js/add_course_category.js.download"></script>
 
     <script type="text/javascript">
       $("#search").click(function() {
