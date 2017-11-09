@@ -43,16 +43,16 @@ $genre_data = mysqli_query($conn,"select DISTINCT genre from movie");
   <div class="collapse navbar-collapse col-9" id="navbarNavDropdown">
     <ul class="navbar-nav col-1"></ul>
     <ul class="navbar-nav col-1">
-      <li> <a class="nav-link" href="" id="courses">Movie</a></li>
+      <li> <a class="nav-link" href="Search Movie.php" id="courses">Movie</a></li>
     </ul>
     <ul class="navbar-nav col-1">
-      <li> <a class="nav-link" href="" id="courses">Director</a></li>
+      <li> <a class="nav-link" href="Search Director.php" id="courses">Director</a></li>
     </ul>
     <ul class="navbar-nav col-2">
-      <li> <a class="nav-link" href="" id="courses">Production House</a></li>
+      <li> <a class="nav-link" href="Search Production House.php" id="courses">Production House</a></li>
     </ul>
     <ul class="navbar-nav col-1">
-      <li> <a class="nav-link" href="" id="courses">Writer</a></li>
+      <li> <a class="nav-link" href="Search Writer.php" id="courses">Writer</a></li>
     </ul>
 
   </div>
@@ -80,7 +80,7 @@ $genre_data = mysqli_query($conn,"select DISTINCT genre from movie");
                                     ?>
                                       <option value="<?php echo $row['id']; ?>"><?php echo $row['name']; ?></option>
                                     <?php
-                                      } 
+                                      }
                                     ?>
                                   </select>
                               </div>
@@ -120,7 +120,7 @@ $genre_data = mysqli_query($conn,"select DISTINCT genre from movie");
                                     ?>
                                       <option value="<?php echo $row['id']; ?>"><?php echo $row['name']; ?></option>
                                     <?php
-                                      } 
+                                      }
                                     ?>
                                   </select>
                               </div>
@@ -141,7 +141,7 @@ $genre_data = mysqli_query($conn,"select DISTINCT genre from movie");
                           </tr>
                         </thead>
                         <tbody class="table_data">
-                          
+
                         </tbody>
                       </table>
 
@@ -161,7 +161,7 @@ $genre_data = mysqli_query($conn,"select DISTINCT genre from movie");
               if(result){
                 var json_res = jQuery.parseJSON(result);
                 var html="";
-                
+
                 $.each( json_res, function( key, value ) {
                   html+="<tr>";
                   html=html+"<td>"+key+"</td>";
