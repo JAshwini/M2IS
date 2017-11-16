@@ -1,7 +1,7 @@
 <?php
 
-$servername = "35.154.150.123";
-$username = "mis";
+$servername = "13.126.21.209";
+$username = "test_demo";
 $password = "sankalp";
 $dbname = "movie";
 
@@ -39,7 +39,7 @@ $production_house_data = mysqli_query($conn,"select * from production_house");
 
   <body>
   <nav class="navbar navbar-expand-lg navbar-light bg-light">
-  <a class="navbar-brand col-3" href=""><img class="logo" src="./add_course_category_files/logo1.png" style=""><b> Movie Management Information System</b></a>
+  <a class="navbar-brand col-3" href=""><img class="logo" src="" style=""><b> Movie Management Information System</b></a>
   <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
     <span class="navbar-toggler-icon"></span>
   </button>
