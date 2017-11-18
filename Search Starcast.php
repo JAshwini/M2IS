@@ -31,7 +31,9 @@ $genre_data = mysqli_query($conn,"select DISTINCT genre from movie");
   <link rel="stylesheet" href="./css/bootstrap.min.css">
   <link rel="stylesheet" href="./css/font-awesome.min.css">
   <link rel="stylesheet" href="./css/jquery.dataTables.min.css">
-
+<!-- sankalp start -->
+  <link rel="stylesheet" href="./css/mdb.min.css">
+<!-- sankalp ends  -->
 </head>
 
   <body>
@@ -146,11 +148,18 @@ $genre_data = mysqli_query($conn,"select DISTINCT genre from movie");
                       </table>
 
     </div>
+
+    <div id="BarChart" style="margin-top:80px; margin-left: 40px;margin-right:20px;margin-bottom:20px;">
+      <canvas id="barChart" height="100" width="400" style="display: block;width: 494px;height: 247px;font-size: 80px;"></canvas>
+    </div>
     <!-- Scripts -->
     <script type="text/javascript" src="./js/jquery.min.js.download"></script>
     <script type="text/javascript" src="./js/popper.min.js.download"></script>
     <script type="text/javascript" src="./js/bootstrap.min.js.download"></script>
     <script type="text/javascript" src="./js/jquery.dataTables.min.js.download"></script>
+<!-- sankalp start  -->
+    <script type="text/javascript" src="./js/mdb.min.js"></script>
+<!-- sankalp end -->
     <script type="text/javascript">
       $("#search").click(function() {
         if($("#director").val()!="" || $("#genre").val()!="" || $("#productionHouse").val()){
@@ -181,6 +190,44 @@ $genre_data = mysqli_query($conn,"select DISTINCT genre from movie");
         }
       });
     </script>
-
+    <script>
+    	var ctxB = document.getElementById("barChart").getContext('2d');
+      var myBarChart = new Chart(ctxB, {
+        type: 'bar',
+        data: {
+            labels: ["Masako Motai", "Alex House", "Tatiana Maslany", "David Rendall", "Vin Diesel", "Paul Walker"],
+            datasets: [{
+                label: '# of Votes',
+                data: [10 ,2, 5, 7, 7, 8],
+                backgroundColor: [
+                    'rgba(255, 99, 132, 0.2)',
+                    'rgba(54, 162, 235, 0.2)',
+                    'rgba(255, 206, 86, 0.2)',
+                    'rgba(75, 192, 192, 0.2)',
+                    'rgba(153, 102, 255, 0.2)',
+                    'rgba(255, 159, 64, 0.2)'
+                ],
+                borderColor: [
+                    'rgba(255,99,132,1)',
+                    'rgba(54, 162, 235, 1)',
+                    'rgba(255, 206, 86, 1)',
+                    'rgba(75, 192, 192, 1)',
+                    'rgba(153, 102, 255, 1)',
+                    'rgba(255, 159, 64, 1)'
+                ],
+                borderWidth: 1
+            }]
+        },
+        optionss: {
+            scales: {
+                yAxes: [{
+                    ticks: {
+                        beginAtZero:true
+                    }
+                }]
+            }
+        }
+    });
+    </script>
 </body>
 </html>
