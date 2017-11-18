@@ -158,7 +158,7 @@ $genre_data = mysqli_query($conn,"select DISTINCT genre from movie");
             url: "logic.php?getdata=starcast&director="+$("#director").val()+"&genre="+$("#genre").val()+"&productionhouse="+$("#productionHouse").val(),
             data: "json",
             success: function(result){
-              if(result){ 
+              if(result){
                 var json_res = jQuery.parseJSON(result);
                 var html="";
 
