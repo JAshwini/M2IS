@@ -58,6 +58,9 @@ $genre_data = mysqli_query($conn,"select DISTINCT genre from movie");
   </div>
 </nav>
 <br>
+<div class="container col-3 container-fluid">
+  <p class="h2">Search Starcast</p>
+</div>
 <br>
     <div class="container col-8 container-fluid">
 
