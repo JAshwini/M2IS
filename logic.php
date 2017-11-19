@@ -147,3 +147,19 @@ if($_GET['getdata']=="writer"){
 	}
 	echo json_encode($data);
 }
+
+if($_GET['getdata']=="ProductionHouse"){
+	$data = array();
+
+	if($_GET['productionhouse']!="Select"){
+
+		$result = mysqli_query($conn,'select * from movie where production_id ='.$_GET['productionhouse'].'');
+
+	}
+	$i=1;
+	while ($row = $result->fetch_assoc()) {
+		$data[$i] = $row["title"];
+		$i++;
+	}
+	echo json_encode($data);
+}
