@@ -57,12 +57,11 @@ $production_house_data = mysqli_query($conn,"select * from production_house");
     </div>
   </nav>
   <br>
-<br>
-  <div class="container col-7 container-fluid">
-
-  <p class="h2">Search Movie using Production House details</p>
-</div>
-<br>
+  <br>
+  <div class="container col-6 container-fluid">
+    <p class="h2">Search Movies of a Production House</p>
+  </div>
+  <br>
   <br>
   <div class="container col-8 container-fluid">
 
