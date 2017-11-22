@@ -52,6 +52,9 @@ $movie = mysqli_query($conn,"select * from movie");
       <ul class="navbar-nav col-1">
         <li> <a class="nav-link" href="Search Director.php" id="director">Director</a></li>
       </ul>
+      <ul class="navbar-nav col-1">
+        <li> <a class="nav-link" href="Search Movie.php" id="movieee">Movie</a></li>
+      </ul>
       <ul class="navbar-nav col-2">
         <li> <a class="nav-link" href="Search Production House.php" id="productionHouse">Production House</a></li>
       </ul>
@@ -59,8 +62,11 @@ $movie = mysqli_query($conn,"select * from movie");
     </div>
   </nav>
   <br>
+  <div class="container col-3 container-fluid">
+    <p class="h2">Search Writer</p>
+  </div>
   <br>
-  <div class="container col-8 container-fluid">
+<div class="container col-8 container-fluid">
 
     <table class="table table-hover" id="myTable">
       <tbody><tr class="header">
