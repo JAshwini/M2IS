@@ -1,24 +1,17 @@
 <?php
-
 $servername = "13.126.21.209";
 $username = "test_demo";
 $password = "sankalp";
 $dbname = "movie";
-
 // Create connection
 $conn = new mysqli($servername, $username, $password,$dbname);
-
 // Check connection
 if ($conn->connect_error) {
     die("Connection failed: " . $conn->connect_error);
 }
-
 $director_data = mysqli_query($conn,"select * from director");
-
 $production_house_data = mysqli_query($conn,"select * from production_house");
-
 $genre_data = mysqli_query($conn,"select DISTINCT genre from movie");
-
 ?>
 <!DOCTYPE html>
 <html lang="en"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8"><style id="stndz-style"></style>
@@ -60,6 +53,9 @@ $genre_data = mysqli_query($conn,"select DISTINCT genre from movie");
   </div>
 </nav>
 <br>
+<div class="container col-3 container-fluid">
+  <p class="h2">Search Starcast</p>
+</div>
 <br>
     <div class="container col-8 container-fluid">
 
@@ -163,6 +159,10 @@ $genre_data = mysqli_query($conn,"select DISTINCT genre from movie");
     <script type="text/javascript">
       $("#search").click(function() {
         if($("#director").val()!="" || $("#genre").val()!="" || $("#productionHouse").val()){
+          // Sankalp start
+          var actors = [];
+          var director_count = [];
+          // Sankalp Ends
           $.ajax({
             url: "logic.php?getdata=starcast&director="+$("#director").val()+"&genre="+$("#genre").val()+"&productionhouse="+$("#productionHouse").val(),
             data: "json",
@@ -170,17 +170,55 @@ $genre_data = mysqli_query($conn,"select DISTINCT genre from movie");
               if(result){
                 var json_res = jQuery.parseJSON(result);
                 var html="";
-
-                $.each( json_res, function( key, value ) {
+                $.each( json_res.table, function( key, value ) {
                   html+="<tr>";
                   html=html+"<td>"+key+"</td>";
                   html=html+"<td></td>";
                   html=html+"<td></td>";
                   html=html+"<td>"+value+"</td>";
                   html+="</tr>";
+                  actors.push(value);
                 });
                 // console.log(html);
                 $(".table_data").html(html);
+                director_count = json_res.graph.director;
+                var ctxB = document.getElementById("barChart").getContext('2d');
+                var myBarChart = new Chart(ctxB, {
+                  type: 'bar',
+                  data: {
+                      labels: actors,
+                      datasets: [{
+                          label: '# of Votes',
+                          data: director_count,
+                          backgroundColor: [
+                              'rgba(255, 99, 132, 0.2)',
+                              'rgba(54, 162, 235, 0.2)',
+                              'rgba(255, 206, 86, 0.2)',
+                              'rgba(75, 192, 192, 0.2)',
+                              'rgba(153, 102, 255, 0.2)',
+                              'rgba(255, 159, 64, 0.2)'
+                          ],
+                          borderColor: [
+                              'rgba(255,99,132,1)',
+                              'rgba(54, 162, 235, 1)',
+                              'rgba(255, 206, 86, 1)',
+                              'rgba(75, 192, 192, 1)',
+                              'rgba(153, 102, 255, 1)',
+                              'rgba(255, 159, 64, 1)'
+                          ],
+                          borderWidth: 1
+                      }]
+                  },
+                  optionss: {
+                      scales: {
+                          yAxes: [{
+                              ticks: {
+                                  beginAtZero:false
+                              }
+                          }]
+                      }
+                  }
+              });
               }
             }
           });
@@ -188,45 +226,7 @@ $genre_data = mysqli_query($conn,"select DISTINCT genre from movie");
         else{
           alert("Please Select Atleast one of the following");
         }
-      });
-    </script>
-    <script>
-    	var ctxB = document.getElementById("barChart").getContext('2d');
-      var myBarChart = new Chart(ctxB, {
-        type: 'bar',
-        data: {
-            labels: ["Masako Motai", "Alex House", "Tatiana Maslany", "David Rendall", "Vin Diesel", "Paul Walker"],
-            datasets: [{
-                label: '# of Votes',
-                data: [10 ,2, 5, 7, 7, 8],
-                backgroundColor: [
-                    'rgba(255, 99, 132, 0.2)',
-                    'rgba(54, 162, 235, 0.2)',
-                    'rgba(255, 206, 86, 0.2)',
-                    'rgba(75, 192, 192, 0.2)',
-                    'rgba(153, 102, 255, 0.2)',
-                    'rgba(255, 159, 64, 0.2)'
-                ],
-                borderColor: [
-                    'rgba(255,99,132,1)',
-                    'rgba(54, 162, 235, 1)',
-                    'rgba(255, 206, 86, 1)',
-                    'rgba(75, 192, 192, 1)',
-                    'rgba(153, 102, 255, 1)',
-                    'rgba(255, 159, 64, 1)'
-                ],
-                borderWidth: 1
-            }]
-        },
-        optionss: {
-            scales: {
-                yAxes: [{
-                    ticks: {
-                        beginAtZero:true
-                    }
-                }]
-            }
-        }
+        console.log(actors);
     });
     </script>
 </body>
