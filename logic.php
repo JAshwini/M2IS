@@ -47,20 +47,23 @@ if($_GET['getdata']=="starcast"){
 		if($_GET['director']!="Select" && $_GET['genre']!="Select" && $_GET['productionhouse']!="Select") {
 
 			$cntr = mysqli_query($conn,'SELECT COUNT(id) as cnt FROM movie WHERE id IN( SELECT a.movie_id FROM ( SELECT movie_id FROM directors_of_movie WHERE director_id = '.$_GET['director'].' ) AS a INNER JOIN( SELECT movie_id FROM actors_in_movie WHERE actor_id = '.$row['id'].' ) AS b ON a.movie_id = b.movie_id )');
-			//add to array of respective
+
 			array_push($director_movie_count,$cntr->fetch_assoc()["cnt"]);
 
-			//query to fetch count of genre
 			$cntr2 = mysqli_query($conn,'SELECT count(id) as cnt FROM movie where id in (SELECT movie_id FROM actors_in_movie WHERE actor_id = '.$row['id'].' ) and genre = "'.$_GET['genre'].'"');
 
 			array_push($genre_movie_count,$cntr2->fetch_assoc()["cnt"]);
 
-			
+			$cntr3 = mysqli_query($conn,'SELECT count(id) as cnt FROM movie where id in (SELECT movie_id FROM actors_in_movie WHERE actor_id = '.$row['id'].' ) and production_id = '.$_GET['productionhouse']);
 
+			array_push($production_house_movie_count,$cntr3->fetch_assoc()["cnt"]);
 		}
 		$i++;
 	}
+
 	$data["graph"]["director"] = $director_movie_count;
+	$data["graph"]["genre"] = $genre_movie_count;
+	$data["graph"]["productionhouse"] = $production_house_movie_count;
 
 	echo json_encode($data);
 }
