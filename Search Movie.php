@@ -166,7 +166,7 @@ $starcast = mysqli_query($conn,"select * from actor");
                           </tr>
                         </thead>
                         <tbody class="table_data">
-                  
+
                         </tbody>
                       </table>
 
@@ -179,9 +179,10 @@ $starcast = mysqli_query($conn,"select * from actor");
 
     <script type="text/javascript">
       $("#search").click(function() {
-        if($("#director").val()!="" || $("#genre").val()!="" || $("#productionHouse").val() || $("#staracast").val() !=""){
+
+        if($("#director").val()!="" || $("#genre").val()!="" || $("#productionHouse").val() || $("#starcast").val() !=""){
           $.ajax({
-            url: "logic.php?getdata=movie&director="+$("#director").val()+"&genre="+$("#genre").val()+"&productionhouse="+$("#productionHouse").val()+"&starcast="+$("#starcast").val(),
+            url: "logic.php?getdata=moviepanel&director="+$("#director").val()+"&genre="+$("#genre").val()+"&productionhouse="+$("#productionHouse").val()+"&starcast="+$("#starcast").val(),
             data: "json",
             success: function(result){
               if(result){
