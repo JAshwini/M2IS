@@ -63,6 +63,9 @@ $starcast = mysqli_query($conn,"select * from actor");
   </div>
 </nav>
 <br>
+<div class="container col-3 container-fluid">
+  <p class="h2">Search Movie</p>
+</div>
 <br>
     <div class="container col-8 container-fluid">
 
