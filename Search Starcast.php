@@ -147,16 +147,16 @@ $genre_data = mysqli_query($conn,"select DISTINCT genre from movie");
 
   </div>
 
-  <div id="barchart_d" style="margin-top:80px; margin-left: 40px;margin-right:20px;margin-bottom:20px;">
+  <div id="barchart_d" style="margin-top:80px; margin-left: 40px;margin-right:20px;margin-bottom:20px; display:none;">
     <canvas id="barchart_director" height="100" width="400" style="display: block;width: 494px;height: 247px;font-size: 80px;"></canvas>
   </div>
 
-  <div id="barchart_g" style="margin-top:80px; margin-left: 40px;margin-right:20px;margin-bottom:20px;">
+  <div id="barchart_g" style="margin-top:80px; margin-left: 40px;margin-right:20px;margin-bottom:20px;display:none;">
     <canvas id="barchart_genre" height="100" width="400" style="display: block;width: 494px;height: 247px;font-size: 80px;"></canvas>
   </div>
 
 
-  <div id="barchart_p" style="margin-top:80px; margin-left: 40px;margin-right:20px;margin-bottom:20px;">
+  <div id="barchart_p" style="margin-top:80px; margin-left: 40px;margin-right:20px;margin-bottom:20px;display:none;">
     <canvas id="barchart_productionhouse" height="100" width="400" style="display: block;width: 494px;height: 247px;font-size: 80px;"></canvas>
   </div>
 
@@ -199,17 +199,15 @@ $genre_data = mysqli_query($conn,"select DISTINCT genre from movie");
               html+="</tr>";
               actors.push(value);
             });
-            // console.log(html);
+
             $(".table_data").html(html);
-
-
             director_count = json_res.graph.director;
             genre_count = json_res.graph.genre;
             productionhouse_count = json_res.graph.productionhouse;
 
-
-
             if(director_count!=null){
+              $("#barchart_d").css("display","block");
+
               var ctxB = document.getElementById("barchart_director").getContext('2d');
               var myBarChart = new Chart(ctxB, {
                 type: 'bar',
@@ -251,6 +249,7 @@ $genre_data = mysqli_query($conn,"select DISTINCT genre from movie");
 
 
             if(genre_count!=null){
+              $("#barchart_g").css("display","block");
               var ctxB = document.getElementById("barchart_genre").getContext('2d');
               var myBarChart = new Chart(ctxB, {
                 type: 'bar',
@@ -289,9 +288,9 @@ $genre_data = mysqli_query($conn,"select DISTINCT genre from movie");
                 }
               });
             }
-
-
+            
             if(productionhouse_count!=null){
+              $("#barchart_p").css("display","block");
               var ctxB = document.getElementById("barchart_productionhouse").getContext('2d');
               var myBarChart = new Chart(ctxB, {
                 type: 'bar',
@@ -332,7 +331,7 @@ $genre_data = mysqli_query($conn,"select DISTINCT genre from movie");
             }
           }
 
-          
+
         }
       });
     }

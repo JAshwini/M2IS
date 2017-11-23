@@ -158,15 +158,15 @@ $production_house_data = mysqli_query($conn,"select * from production_house");
   </div>
   <br>
 
-  <div id="barchart_g" style="margin-top:80px; margin-left: 40px;margin-right:20px;margin-bottom:20px;">
+  <div id="barchart_g" style="margin-top:80px; margin-left: 40px;margin-right:20px;margin-bottom:20px;display:none;">
     <canvas id="barchart_genre" height="100" width="400" style="display: block;width: 494px;height: 247px;font-size: 80px;"></canvas>
   </div>
 
-  <div id="barchart_s" style="margin-top:80px; margin-left: 40px;margin-right:20px;margin-bottom:20px;">
+  <div id="barchart_s" style="margin-top:80px; margin-left: 40px;margin-right:20px;margin-bottom:20px;display:none;">
     <canvas id="barchart_starcast" height="100" width="400" style="display: block;width: 494px;height: 247px;font-size: 80px;"></canvas>
   </div>
 
-  <div id="barchart_p" style="margin-top:80px; margin-left: 40px;margin-right:20px;margin-bottom:20px;">
+  <div id="barchart_p" style="margin-top:80px; margin-left: 40px;margin-right:20px;margin-bottom:20px;display:none;">
     <canvas id="barchart_productionhouse" height="100" width="400" style="display: block;width: 494px;height: 247px;font-size: 80px;"></canvas>
   </div>
   <!-- Scripts -->
@@ -183,7 +183,7 @@ $production_house_data = mysqli_query($conn,"select * from production_house");
         url: "logic.php?getdata=director&starcast="+$("#starcast").val()+"&genre="+$("#genre").val()+"&productionhouse="+$("#productionHouse").val(),
         data: "json",
         before:function(){
-          $("#barchart_d").html("");
+          $("#barchart_s").html("");
           $("#barchart_g").html("");
           $("#barchart_p").html("");
         },
@@ -201,20 +201,21 @@ $production_house_data = mysqli_query($conn,"select * from production_house");
               html+="</tr>";
               directors.push(value);
             });
-            // console.log(html);
+
             $(".table_data").html(html);
             starcast_count = json_res.graph.starcast;
             genre_count = json_res.graph.genre;
             productionhouse_count = json_res.graph.productionhouse;
 
             if(starcast_count!=null){
+              $("#barchart_s").css("display","block");
               var ctxB = document.getElementById("barchart_starcast").getContext('2d');
               var myBarChart = new Chart(ctxB, {
                 type: 'bar',
                 data: {
                   labels: directors,
                   datasets: [{
-                    label: '# of Votes for Director',
+                    label: '# of Votes for Starcast',
                     data: starcast_count,
                     backgroundColor: [
                       'rgba(255, 99, 132, 0.2)',
@@ -248,6 +249,7 @@ $production_house_data = mysqli_query($conn,"select * from production_house");
             }
 
             if(genre_count!=null){
+              $("#barchart_g").css("display","block");
               var ctxB = document.getElementById("barchart_genre").getContext('2d');
               var myBarChart = new Chart(ctxB, {
                 type: 'bar',
@@ -288,6 +290,7 @@ $production_house_data = mysqli_query($conn,"select * from production_house");
             }
 
             if(productionhouse_count!=null){
+              $("#barchart_p").css("display","block");
               var ctxB = document.getElementById("barchart_productionhouse").getContext('2d');
               var myBarChart = new Chart(ctxB, {
                 type: 'bar',
