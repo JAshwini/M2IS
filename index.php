@@ -26,7 +26,7 @@
 		</form>
 		<?php
 		if((isset($_SESSION["loginerror"])) && ($_SESSION["loginerror"])) {
-			echo '<div class="alert alert-danger">
+			echo '<br/><div class="alert alert-danger">
   <strong>Error!</strong> Invalid Username or Password
 </div>';
 		}
