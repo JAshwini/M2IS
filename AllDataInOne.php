@@ -1,17 +1,8 @@
-<?php
-$servername = "13.126.21.209";
-$username = "test_demo";
-$password = "sankalp";
-$dbname = "movie";
-// Create connection
-$conn = new mysqli($servername, $username, $password,$dbname);
-// Check connection
-if ($conn->connect_error) {
-    die("Connection failed: " . $conn->connect_error);
+<?php 
+session_start();
+if(!(isset($_SESSION["loggedin"]))) {
+  header("Location: index.php");
 }
-$director_data = mysqli_query($conn,"select * from director");
-$production_house_data = mysqli_query($conn,"select * from production_house");
-$genre_data = mysqli_query($conn,"select DISTINCT genre from movie");
 ?>
 <!DOCTYPE html>
 <html lang="en"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8"><style id="stndz-style"></style>
@@ -24,9 +15,6 @@ $genre_data = mysqli_query($conn,"select DISTINCT genre from movie");
   <link rel="stylesheet" href="./css/bootstrap.min.css">
   <link rel="stylesheet" href="./css/font-awesome.min.css">
   <link rel="stylesheet" href="./css/jquery.dataTables.min.css">
-<!-- sankalp start -->
-  <link rel="stylesheet" href="./css/mdb.min.css">
-<!-- sankalp ends  -->
 </head>
 
   <body>
@@ -51,6 +39,9 @@ $genre_data = mysqli_query($conn,"select DISTINCT genre from movie");
     </ul>
     <ul class="navbar-nav col-1">
       <li> <a class="nav-link" href="Search Writer.php" id="courses">Writer</a></li>
+    </ul>
+    <ul class="navbar-nav col-1">
+      <li> <a class="nav-link" href="logic.php?action=logout">Logout</a></li>
     </ul>
 
   </div>

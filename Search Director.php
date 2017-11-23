@@ -1,5 +1,10 @@
 <?php
 
+session_start();
+if(!(isset($_SESSION["loggedin"]))) {
+  header("Location: index.php");
+}
+
 $servername = "13.126.21.209";
 $username = "test_demo";
 $password = "sankalp";
@@ -61,9 +66,14 @@ $production_house_data = mysqli_query($conn,"select * from production_house");
       <ul class="navbar-nav col-1">
         <li> <a class="nav-link" href="AllDataInOne.php" id="courses">Search</a></li>
       </ul>
-    </div>
-  </nav>
-  <br>
+    <ul class="navbar-nav col-1">
+      <li> <a class="nav-link" href="logic.php?action=logout">Logout</a></li>
+    </ul>
+  </div>
+</nav>
+<br>
+<br>
+ <br>
   <br>
   <div class="container col-3 container-fluid">
     <p class="h2">Search Director</p>
