@@ -1,5 +1,8 @@
 <?php
-
+session_start();
+if(!(isset($_SESSION["loggedin"]))) {
+  header("Location: index.php");
+}
 $servername = "13.126.21.209";
 $username = "test_demo";
 $password = "sankalp";

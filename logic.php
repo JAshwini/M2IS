@@ -1,4 +1,5 @@
 <?php
+session_start();
 $servername = "13.126.21.209";
 $username = "test_demo";
 $password = "sankalp";
@@ -12,8 +13,24 @@ if ($conn->connect_error) {
 	die("Connection failed: " . $conn->connect_error);
 }
 
-if($_GET['action']=="logout"){
-	//logic for logout // for sankalp
+if(isset($_GET['action']) && $_GET['action']=="login"){
+	$res = mysqli_query($conn,'select * from user where username="'.$_GET["username"].'" and password = "'.$_GET['password'].'"');
+	$result = $res->fetch_assoc();
+
+	if($result){
+		$_SESSION["loggedin"] = true;
+		$_SESSION["loginerror"] = false;
+		header("Location: AllDataInOne.php");
+	}
+	else{
+		$_SESSION["loginerror"] = true;
+		header("Location: index.php");
+	}
+}
+
+if(isset($_GET['action']) && $_GET['action']=="logout"){
+	session_destroy();
+	header("Location: index.php");
 }
 else{
 
