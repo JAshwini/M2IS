@@ -49,6 +49,9 @@ $genre_data = mysqli_query($conn,"select DISTINCT genre from movie");
       <ul class="navbar-nav col-1">
         <li> <a class="nav-link" href="Search Writer.php" id="courses">Writer</a></li>
       </ul>
+      <ul class="navbar-nav col-1">
+        <li> <a class="nav-link" href="AllDataInOne.php" id="courses">Search</a></li>
+      </ul>
 
     </div>
   </nav>

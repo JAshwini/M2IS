@@ -38,6 +38,9 @@ $genre_data = mysqli_query($conn,"select DISTINCT genre from movie");
   <div class="collapse navbar-collapse col-9" id="navbarNavDropdown">
     <ul class="navbar-nav col-1"></ul>
     <ul class="navbar-nav col-1">
+      <li> <a class="nav-link" href="Search Starcast.php" id="courses">Starcast</a></li>
+    </ul>
+    <ul class="navbar-nav col-1">
       <li> <a class="nav-link" href="Search Movie.php" id="courses">Movie</a></li>
     </ul>
     <ul class="navbar-nav col-1">
