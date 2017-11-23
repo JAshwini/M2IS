@@ -104,7 +104,6 @@ $movie = mysqli_query($conn,"select * from movie");
                 <option>Select</option>
                 <?php
                 while (($row = $director_data->fetch_assoc())) {
-                  console.log($row);
                   ?>
                   <option value="<?php echo $row['id']; ?>"><?php echo $row['name']; ?></option>
                   <?php

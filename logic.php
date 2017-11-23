@@ -208,3 +208,49 @@ if($_GET['getdata']=="ProductionHouse"){
 	}
 	echo json_encode($data);
 }
+
+
+if($_GET['getdata']=="allData"){
+	$result = mysqli_query($conn,'select m.*,ph.name from movie m inner join production_house ph ON m.production_id	= ph.id');
+	$data = array();
+	$i = 1;
+	while ($row = $result->fetch_assoc()) {
+
+		//movie and production house name
+		$data[$i]["movie_and_prod"] = array();
+		array_push($data[$i]["movie_and_prod"], $row);
+
+
+		//director data
+		$dir_query = mysqli_query($conn,'select name from director where id in (select director_id from directors_of_movie where movie_id='.$row['id'].')');
+		$data[$i]["director"] = array();
+		while ($dir_row = $dir_query->fetch_assoc()) {
+			array_push($data[$i]["director"], $dir_row);
+		}
+
+
+		//actor data
+		$act_query = mysqli_query($conn,'select name from actor where id in (select actor_id from actors_in_movie where movie_id='.$row['id'].')');
+		$data[$i]["actor"] = array();
+		while ($act_row = $act_query->fetch_assoc()) {
+			array_push($data[$i]["actor"], $act_row);
+		}
+
+
+		//writer data
+		$writer_query = mysqli_query($conn,'select name from writer where id in (select writer_id from writers_of_movie where movie_id='.$row['id'].')');
+		$data[$i]["writer"] = array();
+		while ($writer_row = $writer_query->fetch_assoc()) {
+			array_push($data[$i]["writer"], $writer_row);
+		}
+
+		//boxoffice and country data
+		$loc_and_boxoffice_query = mysqli_query($conn,'select * from movie_location_and_box_office where movie_id='.$row['id']);
+		$data[$i]["loc_and_boxoffice"] = array();
+		while ($loc_and_boxoffice_row = $loc_and_boxoffice_query->fetch_assoc()) {
+			array_push($data[$i]["loc_and_boxoffice"], $loc_and_boxoffice_row);
+		}
+		$i++;
+	}
+	echo json_encode($data);
+}
