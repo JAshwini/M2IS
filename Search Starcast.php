@@ -183,6 +183,11 @@ $genre_data = mysqli_query($conn,"select DISTINCT genre from movie");
       $.ajax({
         url: "logic.php?getdata=starcast&director="+$("#director").val()+"&genre="+$("#genre").val()+"&productionhouse="+$("#productionHouse").val(),
         data: "json",
+        before:function(){
+            $("#barchart_d").html("");
+            $("#barchart_g").html("");
+            $("#barchart_p").html("");
+        },
         success: function(result){
           if(result){
             var json_res = jQuery.parseJSON(result);
@@ -201,6 +206,11 @@ $genre_data = mysqli_query($conn,"select DISTINCT genre from movie");
 
 
             director_count = json_res.graph.director;
+            genre_count = json_res.graph.genre;
+            productionhouse_count = json_res.graph.productionhouse;
+
+
+
             if(director_count!=null){
               var ctxB = document.getElementById("barchart_director").getContext('2d');
               var myBarChart = new Chart(ctxB, {
@@ -242,7 +252,6 @@ $genre_data = mysqli_query($conn,"select DISTINCT genre from movie");
             }
 
 
-            genre_count = json_res.graph.genre;
             if(genre_count!=null){
               var ctxB = document.getElementById("barchart_genre").getContext('2d');
               var myBarChart = new Chart(ctxB, {
@@ -283,7 +292,7 @@ $genre_data = mysqli_query($conn,"select DISTINCT genre from movie");
               });
             }
 
-            productionhouse_count = json_res.graph.productionhouse;
+
             if(productionhouse_count!=null){
               var ctxB = document.getElementById("barchart_productionhouse").getContext('2d');
               var myBarChart = new Chart(ctxB, {
@@ -324,14 +333,14 @@ $genre_data = mysqli_query($conn,"select DISTINCT genre from movie");
               });
             }
           }
+
+          
         }
       });
     }
     else{
       alert("Please Select Atleast one of the following");
     }
-    // console.log(actors);
-
   });
   </script>
 </body>
