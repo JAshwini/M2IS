@@ -61,6 +61,9 @@ $movie = mysqli_query($conn,"select * from movie");
       <ul class="navbar-nav col-1">
         <li> <a class="nav-link" href="AllDataInOne.php" id="courses">Search</a></li>
       </ul>
+      <ul class="navbar-nav col-1">
+      <li> <a class="nav-link" href="logic.php?action=logout">Logout</a></li>
+    </ul>
     </div>
   </nav>
   <br>
