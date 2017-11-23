@@ -202,7 +202,7 @@ $production_house_data = mysqli_query($conn,"select * from production_house");
           if(result){
             var json_res = jQuery.parseJSON(result);
             var html="";
-            $.each( json_res, function( key, value ) {
+            $.each( json_res.table, function( key, value ) {
               html+="<tr>";
               html=html+"<td>"+key+"</td>";
               html=html+"<td></td>";

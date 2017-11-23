@@ -188,9 +188,9 @@ $genre_data = mysqli_query($conn,"select DISTINCT genre from movie");
         url: "logic.php?getdata=starcast&director="+$("#director").val()+"&genre="+$("#genre").val()+"&productionhouse="+$("#productionHouse").val(),
         data: "json",
         before:function(){
-            $("#barchart_d").html("");
-            $("#barchart_g").html("");
-            $("#barchart_p").html("");
+          // $("#barchart_d").css("display","none");
+          // $("#barchart_g").css("display","none");
+          // $("#barchart_p").css("display","none");
         },
         success: function(result){
           if(result){
@@ -207,13 +207,13 @@ $genre_data = mysqli_query($conn,"select DISTINCT genre from movie");
             });
 
             $(".table_data").html(html);
+
             director_count = json_res.graph.director;
             genre_count = json_res.graph.genre;
             productionhouse_count = json_res.graph.productionhouse;
 
             if(director_count!=null){
               $("#barchart_d").css("display","block");
-
               var ctxB = document.getElementById("barchart_director").getContext('2d');
               var myBarChart = new Chart(ctxB, {
                 type: 'bar',
@@ -252,7 +252,6 @@ $genre_data = mysqli_query($conn,"select DISTINCT genre from movie");
                 }
               });
             }
-
 
             if(genre_count!=null){
               $("#barchart_g").css("display","block");
@@ -294,7 +293,7 @@ $genre_data = mysqli_query($conn,"select DISTINCT genre from movie");
                 }
               });
             }
-            
+
             if(productionhouse_count!=null){
               $("#barchart_p").css("display","block");
               var ctxB = document.getElementById("barchart_productionhouse").getContext('2d');
