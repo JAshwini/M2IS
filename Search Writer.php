@@ -58,7 +58,9 @@ $movie = mysqli_query($conn,"select * from movie");
       <ul class="navbar-nav col-2">
         <li> <a class="nav-link" href="Search Production House.php" id="productionHouse">Production House</a></li>
       </ul>
-
+      <ul class="navbar-nav col-1">
+        <li> <a class="nav-link" href="AllDataInOne.php" id="courses">Search</a></li>
+      </ul>
     </div>
   </nav>
   <br>
@@ -104,7 +106,6 @@ $movie = mysqli_query($conn,"select * from movie");
                 <option>Select</option>
                 <?php
                 while (($row = $director_data->fetch_assoc())) {
-                  console.log($row);
                   ?>
                   <option value="<?php echo $row['id']; ?>"><?php echo $row['name']; ?></option>
                   <?php

@@ -1,24 +1,17 @@
 <?php
-
 $servername = "13.126.21.209";
 $username = "test_demo";
 $password = "sankalp";
 $dbname = "movie";
-
 // Create connection
 $conn = new mysqli($servername, $username, $password,$dbname);
-
 // Check connection
 if ($conn->connect_error) {
   die("Connection failed: " . $conn->connect_error);
 }
-
 $director_data = mysqli_query($conn,"select * from director");
-
 $production_house_data = mysqli_query($conn,"select * from production_house");
-
 $genre_data = mysqli_query($conn,"select DISTINCT genre from movie");
-
 ?>
 <!DOCTYPE html>
 <html lang="en"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8"><style id="stndz-style"></style>
@@ -55,6 +48,9 @@ $genre_data = mysqli_query($conn,"select DISTINCT genre from movie");
       </ul>
       <ul class="navbar-nav col-1">
         <li> <a class="nav-link" href="Search Writer.php" id="courses">Writer</a></li>
+      </ul>
+      <ul class="navbar-nav col-1">
+        <li> <a class="nav-link" href="AllDataInOne.php" id="courses">Search</a></li>
       </ul>
 
     </div>
@@ -132,7 +128,6 @@ $genre_data = mysqli_query($conn,"select DISTINCT genre from movie");
           </div>
         </td>
       </tr>
-
     </tbody></table>
     <a type="button" class="btn btn-primary" id="search">Search</a>
     <br><br>

@@ -21,7 +21,6 @@ $production_house_data = mysqli_query($conn,"select * from production_house");
 
 ?>
 
-
 <!DOCTYPE html>
 <!-- saved from url=(0095)https://dl2.pushbulletusercontent.com/gjr25Dxc96AOlpf8rzZR7Es4q9biAHYP/add_course_category.html -->
 <html lang="en"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8"><style id="stndz-style"></style>
@@ -40,6 +39,7 @@ $production_house_data = mysqli_query($conn,"select * from production_house");
 
 <body>
   <nav class="navbar navbar-expand-lg navbar-light bg-light">
+
     <a class="navbar-brand col-3" href=""><img class="logo" src="" style=""><b> Movie Management Information System</b></a>
     <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
       <span class="navbar-toggler-icon"></span>
@@ -58,7 +58,9 @@ $production_house_data = mysqli_query($conn,"select * from production_house");
       <ul class="navbar-nav col-1">
         <li> <a class="nav-link" href="Search Writer.php" id="courses">Writer</a></li>
       </ul>
-
+      <ul class="navbar-nav col-1">
+        <li> <a class="nav-link" href="AllDataInOne.php" id="courses">Search</a></li>
+      </ul>
     </div>
   </nav>
   <br>
@@ -154,7 +156,7 @@ $production_house_data = mysqli_query($conn,"select * from production_house");
       </tbody>
     </table>
   </div>
-
+  <br>
 
   <div id="barchart_g" style="margin-top:80px; margin-left: 40px;margin-right:20px;margin-bottom:20px;">
     <canvas id="barchart_genre" height="100" width="400" style="display: block;width: 494px;height: 247px;font-size: 80px;"></canvas>
@@ -181,16 +183,15 @@ $production_house_data = mysqli_query($conn,"select * from production_house");
         url: "logic.php?getdata=director&starcast="+$("#starcast").val()+"&genre="+$("#genre").val()+"&productionhouse="+$("#productionHouse").val(),
         data: "json",
         before:function(){
-            $("#barchart_d").html("");
-            $("#barchart_g").html("");
-            $("#barchart_p").html("");
+          $("#barchart_d").html("");
+          $("#barchart_g").html("");
+          $("#barchart_p").html("");
         },
         success: function(result){
 
           if(result){
             var json_res = jQuery.parseJSON(result);
             var html="";
-
             $.each( json_res, function( key, value ) {
               html+="<tr>";
               html=html+"<td>"+key+"</td>";
@@ -202,12 +203,9 @@ $production_house_data = mysqli_query($conn,"select * from production_house");
             });
             // console.log(html);
             $(".table_data").html(html);
-
-
             starcast_count = json_res.graph.starcast;
             genre_count = json_res.graph.genre;
             productionhouse_count = json_res.graph.productionhouse;
-
 
             if(starcast_count!=null){
               var ctxB = document.getElementById("barchart_starcast").getContext('2d');
@@ -249,7 +247,6 @@ $production_house_data = mysqli_query($conn,"select * from production_house");
               });
             }
 
-
             if(genre_count!=null){
               var ctxB = document.getElementById("barchart_genre").getContext('2d');
               var myBarChart = new Chart(ctxB, {
@@ -289,7 +286,6 @@ $production_house_data = mysqli_query($conn,"select * from production_house");
                 }
               });
             }
-
 
             if(productionhouse_count!=null){
               var ctxB = document.getElementById("barchart_productionhouse").getContext('2d');
@@ -339,6 +335,5 @@ $production_house_data = mysqli_query($conn,"select * from production_house");
     }
   });
   </script>
-
-
-</body></html>
+</body>
+</html>
