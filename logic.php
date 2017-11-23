@@ -37,7 +37,7 @@ else{
 if($_GET['getdata']=="starcast"){
 	$data = array();
 	if($_GET['director']!="Select" && $_GET['genre']!="Select" && $_GET['productionhouse']!="Select"){
-		$result = mysqli_query($conn,'SELECT * from actor where id in (SELECT actor_id from actors_in_movie where movie_id in (SELECT id from movie where id in (SELECT movie_id from directors_of_movie where director_id='.$_GET['director'].') && production_id='.$_GET['productionhouse'].' && genre="'.$_GET['genre'].'"))');
+		$result = mysqli_query($conn,'select * from actor where id in (SELECT actor_id from actors_in_movie where movie_id in (SELECT id from movie where id in (SELECT movie_id from directors_of_movie where director_id='.$_GET['director'].') && production_id='.$_GET['productionhouse'].' && genre="'.$_GET['genre'].'"))');
 	}
 
 		elseif($_GET['director']=="Select" && $_GET['genre']!="Select" && $_GET['productionhouse']!="Select"){
